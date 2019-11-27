@@ -8,7 +8,8 @@ Dany jest graf opisujący sieć drogową w danym kraju, w którym krawędzie maj
 Dane wejściowe:
 * plik z grafem (węzły *v<sub>1</sub>, v<sub>2</sub>, …*; krawędzie *e<sub>1</sub>, e<sub>2</sub>*, …) opisującym mapę drogową (waga *w<sub>i</sub>* krawędzi *e<sub>i</sub>* to przepustowość połączenia),
 * lista kosztów *k<sub>1</sub>, k<sub>2</sub>, …,* gdzie *k<sub>i</sub>* to koszt remontu *e<sub>i</sub>*,
-* maksymalny budżet *C*,<br><br>
+* maksymalny budżet *C*,<br>
+
 Dane wyjściowe: lista krawędzi do wyremontowania, przepustowość przed i po remoncie.
 
 [Strona projektów](https://pzawistowski.github.io/PSZT19Z)
