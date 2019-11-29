@@ -31,26 +31,28 @@ class Graph:
             print( i )
 
     # Logarithmic - good
-    # We can give 2 vertices in random order
+    # We can give 2 vertices in random order, vertices must be strings
     # returns edge index if it exists or -1 if it doesn't
     def getEdgeIndex( self, vertex1, vertex2 ):
         left = 1
         right = self.m_size
-        edge = sotred( [ vertex1, vertex2 ] ) + [ 0, 0, 0 ]    # we don't care about anything except vertices so we can put 0
+        edge = sorted( [ vertex1, vertex2 ] ) + [ 0, 0, 0 ]    # we don't care about anything except vertices so we can put 0
         while left < right:
-            middle = ( left + right ) / 2
-            if self.m_graph[ middle ] < y:
+            middle = int( ( left + right ) / 2 )
+            if self.m_graph[ middle ] < edge:
                 left = middle + 1
             else:
                 right = middle
-        if self.m_graph[ left ] == edge:
+        if self.m_graph[ left ][ :2 ] == edge[ :2 ]:
             return left
         return -1   # there is no such edge
 
     # Returns edge (list) with given index
     def getEdge( self, index ):
-        if number < m_size:
+        if index < self.m_size:
             return self.m_graph[ index ]
+        else:
+            return [0,0,0,0,0]
 
     # Linear - bad and unnecessary ( unless other doesn't work )
     #def getEdgeNumber( self, vertex1, vertex2 ):    
