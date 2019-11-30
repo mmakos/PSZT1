@@ -1,7 +1,7 @@
 # GRAPH CLASS
-# m_graph -> table of vertices, weights and costs
-# m_size -> quantity of edges
-# m_vertices -> list of vertices, needed for bfs algorithm and if they are or they are not cities
+# _graph -> table of vertices, weights and costs
+# _size -> quantity of edges
+# _vertices -> list of vertices, needed for bfs algorithm and if they are or they are not cities
 # vertex1 vertex2 weight   | with tabs between
 
 class Graph:
@@ -49,22 +49,22 @@ class Graph:
     # returns edge index if it exists or -1 if it doesn't
     def getEdgeIndex( self, vertex1, vertex2 ):
         left = 1
-        right = self.m_size
-        edge = sorted( [ vertex1, vertex2 ] ) + [ None ]    # we don't care about anything except vertices so we can put 0
+        right = self._size
+        edge = sorted( [ vertex1, vertex2 ] ) + [ 0 ]    # we don't care about anything except vertices so we can put 0
         while left < right:
             middle = int( ( left + right ) / 2 )
-            if self.m_graph[ middle ] < edge:
+            if self._graph[ middle ] < edge:
                 left = middle + 1
             else:
                 right = middle
-        if self.m_graph[ left ][ :2 ] == edge[ :2 ]:
+        if self._graph[ left ][ :2 ] == edge[ :2 ]:
             return left
         return -1   # there is no such edge
 
     # Returns edge (list) with given index
     def getEdge( self, index ):
-        if index < self.m_size:
-            return self.m_graph[ index ]
+        if index < self._size:
+            return self._graph[ index ]
 
     
     # Edmonds-Karp algorithm ( extended Ford-Fulkerson method )
@@ -77,15 +77,19 @@ class Graph:
         CFP = []    # list of residual capacity for path ending in some node of network ( we want to take minimum )
         cp = abs    # residual capacity = total capacity - flow used
         fmax = 0    # maximal flow - that is what we are looking for
-        escape = True
-        for i in range( m_size ):
-            F[ i ] = 0
+        escape = False
+        for i in range( len( self._vertices ) ):
+            P.append( None )
+        for i in range( len( self._vertices ) ):
+            CFP.append( None )
+        for i in range( self._size ):
+            F.append( 0 )
 
-        while escape:
+        while True:
             ############## variables initialization
-            for i in range( len( self.m_vertices ) ):
+            for i in range( len( self._vertices ) ):
                 P[ i ] = -1
-            CPF[ begin ] = int( 'ffffffff', 16 )
+            CFP[ begin ] = int( 'ffffffff', 16 )
             P[ begin ] = -2
             Q.clear()
             Q.append( begin )
@@ -93,23 +97,23 @@ class Graph:
             while Q:
                 escape = False                                          # to end algorithm when it's time
                 x = Q.pop( 0 )                                          # take first vertex from queue
-                for y in range( 0, len( self.m_vertices ) ):            # look for all vertices not visited and having connection with x
+                for y in range( 0, len( self._vertices ) ):             # look for all vertices not visited and having connection with x
                     index = self.getEdgeIndex( x, y )                   # look for edge ( x, y ) or ( y, x )
-                    cp = self.m_graph[ index ][ 2 ] - F[ index ]        # count residual capacity
+                    cp = self._graph[ index ][ 2 ] - F[ index ]         # count residual capacity
                     if index != -1 and P[ y ] == -1 and cp != 0:        # if edge exists and if neighbor of x - y was not examined yet and cp is not 0
                         P[ y ] = x                                      # remember previous on path
                         CFP[ y ] = min( CFP[ x ], cp )                  # cout residual capacity to y vertex
                         if y == end:                                    # if reached end
+                            fmax += CFP[ end ]                          # add residual capacity to maximum flow
+                            y = end
+                            while y != begin:                            # go back along the path from end to begin
+                                F[ self.getEdgeIndex( P[ y ], y ) ] += CFP[ end ]       # add to used flow recently counted residual capacity
+                                y = P[ y ]
                             escape = True                               # end bfs algorithm but don't end whole algorithm because we found next path                          
                             break
                         Q.append( y )                                   # add y to vertices to visit
                 if escape:                                              # if bfs should be ended
-                    break                                               # end it
-            fmax += CFP[ end ]                                          # add residual capacity to maximum flow
-            y = end
-            while y != begin:                                           # go back along the path from end to begin
-                F[ self.getEdgeIndex( P[ y ], y ) ] += CFP[ end ]       # add to used flow recently counted residual capacity
-                y = P[ y ]                                              # go to previous vertex of the path
+                    break                                               # end it                                              # go to previous vertex of the path
             if not escape:                                              # if didn't find path
                 break                                                   # end algorithm
         return fmax                                                     # and return fmax
