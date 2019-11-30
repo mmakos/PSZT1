@@ -40,7 +40,7 @@ c<sub>0</sub> c<sub>1</sub> c<sub>2</sub> c<sub>3</sub> ... - separated with spa
 e<sub>i0</sub> e<sub>j0</sub> - separated with tab<br>
 e<sub>i1</sub> e<sub>j1</sub><br>
 e<sub>i2</sub> e<sub>j2</sub> ...<br>
-where c<sub>i</sub> is type of bool and says if vertex is a city or not<br>br>
+where c<sub>i</sub> is type of bool and says if vertex is a city or not<br><br>
 
 **setWeights( weights, modifiesEdgesIndexes )**<br>
 Function sets new weights to graph
