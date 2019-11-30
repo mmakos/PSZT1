@@ -6,36 +6,43 @@
 
 class Graph:
     def __init__( self ):
-        self.m_graph = []
-        self.m_size = 0
-        self.m_vertices = []
+        self._graph = []
+        self._size = 0
+        self._vertices = []
 
-    def addEdge( self, vertex1, vertex2, weight = None ):
+    def _addEdge( self, vertex1, vertex2, weight = None ):
         if vertex1 != vertex2:
-            self.m_graph.append( sorted( [ vertex1, vertex2 ] ) + [ weight ] )  # adds sorted vertices to avoid duouble searching
-            self.m_size += 1
-
-    def saveToFile( self, fileName ):
-        file = open( fileName, "wt" )
-        for i in self.m_graph:
-            file.write( f"{i[ 0 ] }\t{ i[ 1 ] }\t{ i[ 2 ] }\n")
-        file.close()
+            self._graph.append( sorted( [ vertex1, vertex2 ] ) + [ weight ] )  # adds sorted vertices to avoid duouble searching
+            self._size += 1
 
     def loadFromFile( self, fileName ):
         file = open( fileName, "rt" )
         vertices = file.readline().split()
         isCity = file.readline().split()
-        self.m_vertices = [ ( int( vertices[ i ] ), int( isCity[ i ] ) ) for i in range( 0, len( vertices ) ) ]
+        self._vertices = [ ( int( vertices[ i ] ), int( isCity[ i ] ) ) for i in range( len( vertices ) ) ]
         for line in file:
             line = line.split( "\t" )
-            self.addEdge( int( line[ 0 ] ), int( line[ 1 ] ) )
+            self._addEdge( int( line[ 0 ] ), int( line[ 1 ] ) )
         file.close()
-        self.m_graph.sort()     # because we want to find edges in logn complexity
+        self._graph.sort()     # because we want to find edges in logarithmic complexity
 
     def printGraph( self ):
-        print( self.m_vertices )
-        for i in self.m_graph:
+        print( self._vertices )
+        for i in self._graph:
             print( i )
+
+    def _setWeight( self, edgeIndex, weight ):
+        self._graph[ edgeIndex ][ 2 ] = weight
+
+    # sets proper weights to Graph
+    # weights -> type of weights and it's a list with weights before, after and costs
+    # modifiedEdgesIndexes -> list of edge indexes which will be remonted
+    def setWeights( self, weights, modifiedEdgesIndexes ):
+        for i in range( len( weights ) ):
+            if i in modifiedEdgesIndexes:                   # if edges weight should be modified
+                self._setWeight( i, weights[ i ][ 1 ] )     # set weight to weightAfter
+            else:                                           # if not
+                self._setWeight( i, weights[ i ][ 0 ] )     # set weight to weightBefore
 
     # Logarithmic - good
     # We can give 2 vertices in random order, vertices must be strings
@@ -71,12 +78,12 @@ class Graph:
         cp = abs    # residual capacity = total capacity - flow used
         fmax = 0    # maximal flow - that is what we are looking for
         escape = True
-        for i in range( 0, m_size ):
+        for i in range( m_size ):
             F[ i ] = 0
 
         while escape:
             ############## variables initialization
-            for i in range( 0, len( self.m_vertices ) ):
+            for i in range( len( self.m_vertices ) ):
                 P[ i ] = -1
             CPF[ begin ] = int( 'ffffffff', 16 )
             P[ begin ] = -2
