@@ -13,3 +13,47 @@ Dane wejściowe:
 Dane wyjściowe: lista krawędzi do wyremontowania, przepustowość przed i po remoncie.
 
 [Strona projektów](https://pzawistowski.github.io/PSZT19Z)
+
+
+## Some Documentation
+
+### class Graph
+It stores whole graph with vertices which can be cities or not, edges and weights
+* *_graph* - table of edges and weights \[ vertex1, vertex2, weight \]
+* *_size* - quantity of edges
+* *_vertices* - list of vertices and if they are or they are not cities<br><br>
+
+**loadFromFile( fileName )**<br>
+Function loads graph from file
+* *fileName* - name of file with graph *(string)*
+File format:<br>
+v<sub>0</sub> v<sub>1</sub> v<sub>2</sub> v<sub>3</sub> ...<br> - separated with space
+c<sub>0</sub> c<sub>1</sub> c<sub>2</sub> c<sub>3</sub> ...<br> - separated with space
+e<sub>i0</sub> e<sub>j0</sub><br> - separated with tab
+e<sub>i1</sub> e<sub>j1</sub><br>
+e<sub>i2</sub> e<sub>j2</sub> ...<br><br>
+where c<sub>i</sub> is type of bool and says if vertex is a city or not
+
+**setWeights( weights, modifiesEdgesIndexes )**<br>
+Function sets new weights to graph
+* *weights* - table of weights and costs \[ weightBefore, weightAfter, cost \]. It should be oject of class *weights*
+* *modifiesEdgesIndexes* - list of edge's indexes which need to be modified. Edge's index can be given by function *getEdgeIndex*<br><br>
+
+**getEdgeIndex( vertex1, vertex2 )**<br>
+Function return edge's index based on 2 vertices
+* *vertex1, vertex2* - vertices of edge which index function will return
+* *return* - index of given edge or -1 if edge doesn't exist<br><br>
+
+**maxFlow( begin, end )**<br>
+Function counts maximum flow of graph for pair of vertex *( begin, end )*
+* *begin, end* - vertices - between them function will count maximum flow
+* *return* - maximum flow<br><br>
+
+### class Weights
+Stores list of weights and costs<br><br>
+
+**loadFromFile( fileName )**<br>
+Function loads weights and costs from file
+* *fileName* - name of file with weights and costs *(string)*
+Line in file format:<br>
+weightBefore weightAfter cost - must be separated with tab
