@@ -2,9 +2,9 @@ import graph
 
 g = graph.Graph()
 
-g.loadFromFile( "graphTest" )
+g.loadFromFile( "graphTestMaxFlow" )
 g.printGraph()
 
-print( g.getEdge( g.getEdgeIndex( '0', '4' ) ) )
+print( g.maxFlow( 1, 4 ) )
 
 
