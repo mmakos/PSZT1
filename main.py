@@ -8,6 +8,7 @@ g.loadFromFile( "graphTestMaxFlow" )
 w.loadFromFile( "weightsTest" )
 g.printGraph()
 
+g.setWeights( w.getList(), [] )
 print( g.maxFlow( 1, 4 ) )
 
 
