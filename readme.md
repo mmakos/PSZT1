@@ -19,11 +19,11 @@ Dane wyjściowe: lista krawędzi do wyremontowania, przepustowość przed i po r
 
 ### Main
 #### How to use Graph and Weights objects
-* You need to create an object of class Graph and an object of class Weights.<br>
-* Then you need to of course load graph and weights from files.<br>
-* Then you obligatory need to set weights to graph - it's not going to work with none weights. You can call function: **graph.setWeights( weights.getList(), [] )**<br>
-* Now you can do whatever you want.<br><br>
-* If you want to call **maxFlow()** function for graph with changed weights you need to call fuction **setWeights()** before.
+* You need to create an object of class Graph and an object of class Weights.
+* Then you need to of course load graph and weights from files.
+* Then you obligatory need to set weights to graph - it's not going to work with none weights. You can call function: **graph.setWeights( weights.getList(), [] )**
+* Now you can do whatever you want.
+* If you want to call **maxFlow()** function for graph with changed weights you need to call fuction **setWeights()** before.<br><br>
 
 ### Graph
 It stores whole graph with vertices which can be cities or not, edges and weights
@@ -39,8 +39,8 @@ v<sub>0</sub> v<sub>1</sub> v<sub>2</sub> v<sub>3</sub> ... - separated with spa
 c<sub>0</sub> c<sub>1</sub> c<sub>2</sub> c<sub>3</sub> ... - separated with space<br>
 e<sub>i0</sub> e<sub>j0</sub> - separated with tab<br>
 e<sub>i1</sub> e<sub>j1</sub><br>
-e<sub>i2</sub> e<sub>j2</sub> ...<br><br>
-where c<sub>i</sub> is type of bool and says if vertex is a city or not
+e<sub>i2</sub> e<sub>j2</sub> ...<br>
+where c<sub>i</sub> is type of bool and says if vertex is a city or not<br>br>
 
 **setWeights( weights, modifiesEdgesIndexes )**<br>
 Function sets new weights to graph
