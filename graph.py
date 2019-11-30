@@ -26,6 +26,18 @@ class Graph:
         file.close()
         self._graph.sort()     # because we want to find edges in logarithmic complexity
 
+    def saveToFile( self, fileName ):
+        file = open( fileName, "wt" )
+        for i in self._vertices:        # write vertices
+            file.write( f"{i[ 0 ]} " )
+        file.write( "\n" )              
+        for i in self._vertices:        # write cities
+            file.write( f"{int( i[ 1 ] )} " )
+        file.write( "\n" )
+        for i in self._graph:
+            file.write( f"{i[ 0 ]}\t{i[ 1 ]}\n" )
+        file.close()
+        
     def printGraph( self ):
         print( self._vertices )
         for i in self._graph:
