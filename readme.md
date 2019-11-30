@@ -21,7 +21,7 @@ Dane wyjściowe: lista krawędzi do wyremontowania, przepustowość przed i po r
 #### How to use Graph and Weights objects
 You need to create an object of class Graph and an object of class Weights.<br>
 Then you need to of course load graph and weights from files.
-Then you obligatory need to set weights to graph - it's not going to work with none weights. You can call function: graph.setWeights( weights.getList(), [] )
+Then you obligatory need to set weights to graph - it's not going to work with none weights. You can call function: graph.setWeights( weights.getList(), [] )<br>
 Now you can do whatever you want<br><br>
 
 ### Graph
