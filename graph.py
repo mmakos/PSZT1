@@ -19,7 +19,7 @@ class Graph:
         file = open( fileName, "rt" )
         vertices = file.readline().split()
         isCity = file.readline().split()
-        self._vertices = [ ( int( vertices[ i ] ), bool( isCity[ i ] ) ) for i in range( len( vertices ) ) ]
+        self._vertices = [ ( int( vertices[ i ] ), bool( int( isCity[ i ] ) ) ) for i in range( len( vertices ) ) ]
         for line in file:
             line = line.split( "\t" )
             self._addEdge( int( line[ 0 ] ), int( line[ 1 ] ) )
