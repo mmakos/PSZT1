@@ -19,10 +19,11 @@ Dane wyjściowe: lista krawędzi do wyremontowania, przepustowość przed i po r
 
 ### Main
 #### How to use Graph and Weights objects
-You need to create an object of class Graph and an object of class Weights.<br>
-Then you need to of course load graph and weights from files.
-Then you obligatory need to set weights to graph - it's not going to work with none weights. You can call function: graph.setWeights( weights.getList(), [] )<br>
-Now you can do whatever you want<br><br>
+* You need to create an object of class Graph and an object of class Weights.<br>
+* Then you need to of course load graph and weights from files.<br>
+* Then you obligatory need to set weights to graph - it's not going to work with none weights. You can call function: **graph.setWeights( weights.getList(), [] )**<br>
+* Now you can do whatever you want.<br><br>
+* If you want to call **maxFlow()** function for graph with changed weights you need to call fuction **setWeights()** before.
 
 ### Graph
 It stores whole graph with vertices which can be cities or not, edges and weights
@@ -34,9 +35,9 @@ It stores whole graph with vertices which can be cities or not, edges and weight
 Function loads graph from file
 * *fileName* - name of file with graph *(string)*
 File format:<br>
-v<sub>0</sub> v<sub>1</sub> v<sub>2</sub> v<sub>3</sub> ...<br> - separated with space
-c<sub>0</sub> c<sub>1</sub> c<sub>2</sub> c<sub>3</sub> ...<br> - separated with space
-e<sub>i0</sub> e<sub>j0</sub><br> - separated with tab
+v<sub>0</sub> v<sub>1</sub> v<sub>2</sub> v<sub>3</sub> ... - separated with space<br>
+c<sub>0</sub> c<sub>1</sub> c<sub>2</sub> c<sub>3</sub> ... - separated with space<br>
+e<sub>i0</sub> e<sub>j0</sub> - separated with tab<br>
 e<sub>i1</sub> e<sub>j1</sub><br>
 e<sub>i2</sub> e<sub>j2</sub> ...<br><br>
 where c<sub>i</sub> is type of bool and says if vertex is a city or not
@@ -51,10 +52,12 @@ Function return edge's index based on 2 vertices
 * *vertex1, vertex2* - vertices of edge which index function will return
 * *return* - index of given edge or -1 if edge doesn't exist<br><br>
 
-**maxFlow( begin, end )**<br>
-Function counts maximum flow of graph for pair of vertex *( begin, end )*
-* *begin, end* - vertices - between them function will count maximum flow
-* *return* - maximum flow<br><br>
+**maxFlow( average )**<br>
+Function counts maximum flow of graph for each pair of cities
+* *average* - optional bool value - deafult value is *True*
+  * *False* - function returns sum of maximum flows of all pairs of cities
+  * *True* - function returns average of maximum flows of all pairs of cities
+* *return* - maximum flow of graph<br><br>
 
 ### Weights
 Stores list of weights and costs<br><br>
