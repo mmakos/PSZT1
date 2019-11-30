@@ -19,7 +19,7 @@ class Graph:
         file = open( fileName, "rt" )
         vertices = file.readline().split()
         isCity = file.readline().split()
-        self._vertices = [ ( int( vertices[ i ] ), int( isCity[ i ] ) ) for i in range( len( vertices ) ) ]
+        self._vertices = [ ( int( vertices[ i ] ), bool( isCity[ i ] ) ) for i in range( len( vertices ) ) ]
         for line in file:
             line = line.split( "\t" )
             self._addEdge( int( line[ 0 ] ), int( line[ 1 ] ) )
@@ -44,12 +44,27 @@ class Graph:
             else:                                           # if not
                 self._setWeight( i, weights[ i ][ 0 ] )     # set weight to weightBefore
 
+    def maxFlow( self, average = True ):
+        fmax = 0
+        pairs = 0
+        for i in range( len( self._vertices ) ):
+            if not self._vertices[ i ][ 1 ]:
+                continue
+            for j in range( i + 1, len( self._vertices ) ):
+                if not self._vertices[ j ][ 1 ]:
+                    continue
+                fmax += self._edmondsKarp( i, j )
+                pairs += 1
+        if average:
+            fmax /= pairs
+        return fmax
+
     # Logarithmic - good
     # We can give 2 vertices in random order, vertices must be strings
     # returns edge index if it exists or -1 if it doesn't
     def getEdgeIndex( self, vertex1, vertex2 ):
-        left = 1
-        right = self._size
+        left = 0
+        right = self._size - 1
         edge = sorted( [ vertex1, vertex2 ] ) + [ 0 ]    # we don't care about anything except vertices so we can put 0
         while left < right:
             middle = int( ( left + right ) / 2 )
@@ -69,7 +84,7 @@ class Graph:
     
     # Edmonds-Karp algorithm ( extended Ford-Fulkerson method )
     # Finds maximum flow in a flow network
-    def maxFlow( self, begin, end ):
+    def _edmondsKarp( self, begin, end ):
         ############## ancillary variables
         Q = []      # queue of vertices to visit
         P = []      # list of visited neighbors
@@ -92,8 +107,8 @@ class Graph:
             CFP[ begin ] = int( 'ffffffff', 16 )
             P[ begin ] = -2
             Q.clear()
-            Q.append( begin )
-            ############## actual begin of algorithm                                           # add begin vertex to queue of vertices to visit
+            Q.append( begin )                                           # add begin vertex to queue of vertices to visit
+            ############## actual begin of algorithm
             while Q:
                 escape = False                                          # to end algorithm when it's time
                 x = Q.pop( 0 )                                          # take first vertex from queue

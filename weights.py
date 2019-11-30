@@ -11,3 +11,7 @@ class Weights:
         for line in file:
             line = line.split( "\t" )
             self._list.append( [ int( line[ 0 ] ), int( line[ 1 ] ), int( line[ 2 ] ) ] )
+        file.close()
+
+    def getList( self ):
+        return self._list
