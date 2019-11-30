@@ -15,9 +15,16 @@ Dane wyjściowe: lista krawędzi do wyremontowania, przepustowość przed i po r
 [Strona projektów](https://pzawistowski.github.io/PSZT19Z)
 
 
-## Some Documentation
+## Some documentation
 
-### class Graph
+### Main
+#### How to use Graph and Weights objects
+You need to create an object of class Graph and an object of class Weights.<br>
+Then you need to of course load graph and weights from files.
+Then you obligatory need to set weights to graph - it's not going to work with none weights. You can call function: graph.setWeights( weights.getList(), [] )
+Now you can do whatever you want<br><br>
+
+### Graph
 It stores whole graph with vertices which can be cities or not, edges and weights
 * *_graph* - table of edges and weights \[ vertex1, vertex2, weight \]
 * *_size* - quantity of edges
@@ -49,7 +56,7 @@ Function counts maximum flow of graph for pair of vertex *( begin, end )*
 * *begin, end* - vertices - between them function will count maximum flow
 * *return* - maximum flow<br><br>
 
-### class Weights
+### Weights
 Stores list of weights and costs<br><br>
 
 **loadFromFile( fileName )**<br>
@@ -57,3 +64,7 @@ Function loads weights and costs from file
 * *fileName* - name of file with weights and costs *(string)*
 Line in file format:<br>
 weightBefore weightAfter cost - must be separated with tab
+
+**getList()**<br>
+Function returns list of weights and costs
+*return* - list of weights and costs
