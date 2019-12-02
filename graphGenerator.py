@@ -20,6 +20,7 @@ class Generator:
         self.g.saveToFile( graphFileName )
 
         for i in range( self.g._size ):
-            self.w._list.append( [ random.randint( weightMin, weightMax ), random.randint( weightMin + weightGrowMax, weightMax + weightGrowMax ), random.randint( costMin, costMax ) ] )
+            weightBefore = random.randint( weightMin, weightMax )
+            self.w._list.append( [ weightBefore, weightBefore + random.randint( 1, weightGrowMax ), random.randint( costMin, costMax ) ] )
         self.w.saveToFile( weightsFileName )
 
