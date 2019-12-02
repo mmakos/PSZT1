@@ -56,6 +56,10 @@ class Graph:
             else:                                           # if not
                 self._setWeight( i, weights[ i ][ 0 ] )     # set weight to weightBefore
 
+    # return list of edges (with weights)
+    def getEdgesList( self ):
+        return self._graph
+
     def maxFlow( self, average = True ):
         fmax = 0
         pairs = 0
