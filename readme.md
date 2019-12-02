@@ -47,8 +47,12 @@ Function sets new weights to graph
 * *weights* - table of weights and costs \[ weightBefore, weightAfter, cost \]. It should be oject of class *weights*
 * *modifiesEdgesIndexes* - list of edge's indexes which need to be modified. Edge's index can be given by function *getEdgeIndex*<br><br>
 
+**getEdgesList()**<br>
+Function returns list of edges with current weights.
+* *return* - list of edges with weights. Format of one element of list is: [ vertex1, vertex1, weight ]
+
 **getEdgeIndex( vertex1, vertex2 )**<br>
-Function return edge's index based on 2 vertices
+Function returns edge's index based on 2 vertices
 * *vertex1, vertex2* - vertices of edge which index function will return
 * *return* - index of given edge or -1 if edge doesn't exist<br><br>
 
